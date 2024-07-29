@@ -1,0 +1,17 @@
+delphi
+procedure AddBook(Title, Author: string; PublishedYear: Integer; Genre: string);
+begin
+  ADOQuery.SQL.Text := 'INSERT INTO Books (Title, Author, PublishedYear, Genre) VALUES (:Title, :Author, :PublishedYear, :Genre)';
+  ADOQuery.Parameters.ParamByName('Title').Value := Title;
+  ADOQuery.Parameters.ParamByName('Author').Value := Author;
+  ADOQuery.Parameters.ParamByName('PublishedYear').Value := PublishedYear;
+  ADOQuery.Parameters.ParamByName('Genre').Value := Genre;
+  ADOQuery.ExecSQL;
+end;
+
+procedure ListBooks;
+begin
+  ADOQuery.SQL.Text := 'SELECT * FROM Books';
+  ADOQuery.Open;
+  // Implement data display logic here
+end;
