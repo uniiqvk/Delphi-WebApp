@@ -1,0 +1,26 @@
+CREATE DATABASE LibraryDB;
+
+USE LibraryDB;
+
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY IDENTITY,
+    Title NVARCHAR(100) NOT NULL,
+    Author NVARCHAR(100) NOT NULL,
+    PublishedYear INT,
+    Genre NVARCHAR(50)
+);
+
+CREATE TABLE Members (
+    MemberID INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100) UNIQUE NOT NULL,
+    JoinDate DATE DEFAULT GETDATE()
+);
+
+CREATE TABLE BorrowedBooks (
+    BorrowID INT PRIMARY KEY IDENTITY,
+    BookID INT FOREIGN KEY REFERENCES Books(BookID),
+    MemberID INT FOREIGN KEY REFERENCES Members(MemberID),
+    BorrowDate DATE DEFAULT GETDATE(),
+    ReturnDate DATE
+);
